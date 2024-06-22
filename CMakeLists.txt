@@ -21,8 +21,15 @@ FetchContent_MakeAvailable(glad)
 
 include(cmake/CPM.cmake)
 CPMAddPackage("gh:fmtlib/fmt#10.2.1")
+CPMAddPackage("gh:gabime/spdlog@1.14.1")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PUBLIC ${SOURCES})
-target_link_libraries(${PROJECT_NAME} glfw glad fmt)
+target_link_libraries(${PROJECT_NAME} glfw glad fmt spdlog)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
+
+add_custom_command(
+    TARGET ReMinecraft
+    POST_BUILD
+    COMMAND ReMinecraft
+)
